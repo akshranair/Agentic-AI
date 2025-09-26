@@ -1,0 +1,4 @@
+1. Install UV: pip install uv 
+2. or Run: uv self update
+3. add pyproject.toml
+4. Run: uv sync
