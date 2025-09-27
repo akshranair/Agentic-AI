@@ -1,12 +1,11 @@
-# FinancialResearcherAi Crew
+# Financial Researcher AI Crew
 
 This project utilizes the Crew AI framework to create a team of autonomous AI agents that work together to perform in-depth financial research and analysis on any given company.
 
-1. The crew consists of two specialized agents:
+The crew consists of two specialized agents:
 
-2. A Researcher Agent that scours the internet for the latest news, financial reports, and market data.
-
-3. An Analyst Agent that synthesizes the collected data into a comprehensive, easy-to-read report with an executive summary and market outlook.
+1.  A **Researcher Agent** that scours the internet for the latest news, financial reports, and market data.
+2.  An **Analyst Agent** that synthesizes the collected data into a comprehensive, easy-to-read report with an executive summary and market outlook.
 
 ## Features
 
@@ -18,60 +17,89 @@ This project utilizes the Crew AI framework to create a team of autonomous AI ag
 
 ## Technology Stack
 
-* **Framework**: Crew AI
+* **Framework**: [Crew AI](https://www.crewai.com/)
 * **LLM**: Requires an OpenAI API Key (or another compatible model)
-* **Search Tool**: SerperDev for efficient, real-time search results.
+* **Search Tool**: [SerperDev](https://serper.dev/) for efficient, real-time search results.
 * **Language**: Python 3.12+
 
+## Setup and Installation
 
+Follow these steps to get the project up and running on your local machine.
 
-## Installation
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/your-username/financial_researcher_ai.git](https://github.com/your-username/financial_researcher_ai.git)
+    cd financial_researcher_ai
+    ```
+2.  **Create a Virtual Environment**
+    It's highly recommended to use a virtual environment to manage project dependencies.
+    ```bash
+    # Create the virtual environment
+    python3 -m venv .venv
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+    # Activate it (on macOS/Linux)
+    source .venv/bin/activate
 
-First, if you haven't already, install uv:
+    # On Windows
+    # .venv\Scripts\activate
+    ```
+3.  **Install Dependencies**
+    The `crewai` command-line tool uses `uv` to manage dependencies, which are listed in the `pyproject.toml` file.
+    ```bash
+    crewai install
+    ```
+    If you prefer pip, you can install the required packages manually:
+    ```bash
+    pip install crewai crewai-tools python-dotenv
+    ```
 
-```bash
-pip install uv
-```
+## 4. Set Up API Keys
 
-Next, navigate to your project directory and install the dependencies:
+This is the most important step. The agents need API keys to access the language model (OpenAI) and the search tool (Serper).
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
+1.  Create a new file named `.env` in the **root directory** of your project.
+2.  Add your API keys to the `.env` file in the following format:
+    ```env
+    # .env
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+    # Get your key from: [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+    OPENAI_API_KEY="sk-..."
 
-- Modify `src/financial_researcher_ai/config/agents.yaml` to define your agents
-- Modify `src/financial_researcher_ai/config/tasks.yaml` to define your tasks
-- Modify `src/financial_researcher_ai/crew.py` to add your own logic, tools and specific args
-- Modify `src/financial_researcher_ai/main.py` to add custom inputs for your agents and tasks
+    # Get your key from: [https://serper.dev/api-key](https://serper.dev/api-key)
+    SERPER_API_KEY="..."
+    ```
 
-## Running the Project
+> **Note**: The `.env` file is included in `.gitignore` to ensure your secret keys are not accidentally committed to a public repository.
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+## How to Run
 
-```bash
-$ crewai run
-```
+1.  **Set the Target Company**: Open the `src/financial_researcher_ai/main.py` file and change the company name in the `inputs` dictionary.
+    ```python
+    # src/financial_researcher_ai/main.py
 
-This command initializes the financial_researcher-ai Crew, assembling the agents and assigning them tasks as defined in your configuration.
+    def run():
+        """
+        Run the financial researcher crew
+        """
+        inputs = {
+            'company': 'NVIDIA'  # <-- Change this to any company you want
+        }
+        FinancialResearcherAI().crew().kickoff(inputs=inputs)
+    ```
+2.  **Run the Crew**: Execute the following command from your terminal (make sure your virtual environment is activated).
+    ```bash
+    crewai run
+    ```
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+The agents will begin their tasks, and you will see their progress printed to the console. The final report will be displayed at the end of the process.
 
-## Understanding Your Crew
+## Customizing the Crew
 
-The financial_researcher-ai Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+You can easily modify the behavior of the agents and tasks by editing the YAML configuration files:
 
-## Support
+* **`config/agents.yaml`**: Change the `role`, `goal`, and `backstory` of each agent to alter their personality and focus.
+* **`config/tasks.yaml`**: Modify the `description` and `expected_output` for each task to change what the agents are instructed to do.
 
-For support, questions, or feedback regarding the FinancialResearcherAi Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+## License
 
-Let's create wonders together with the power and simplicity of crewAI.
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
