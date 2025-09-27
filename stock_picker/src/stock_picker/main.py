@@ -14,7 +14,7 @@ def run():
 
 
     inputs = {
-        'sector': 'Food'
+        'sector': 'Technology'
     }
 
     result = StockPicker().crew().kickoff(inputs = inputs)
