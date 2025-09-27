@@ -1,54 +1,31 @@
-# FinancialResearcherAi Crew
+Financial Researcher AI CrewThis project utilizes the Crew AI framework to create a team of autonomous AI agents that work together to perform in-depth financial research and analysis on any given company.The crew consists of two specialized agents:A Researcher Agent that scours the internet for the latest news, financial reports, and market data.An Analyst Agent that synthesizes the collected data into a comprehensive, easy-to-read report with an executive summary and market outlook.FeaturesAutomated Research: Automatically gathers up-to-date information about a specified company.In-Depth Analysis: Provides insightful analysis, including trends, challenges, and future outlook.Sequential Task Processing: Ensures a logical workflow where analysis is only performed after research is complete.Customizable: Easily change the target company, or modify the agents' goals and backstories in the configuration files.Extensible: Add new agents or tools to expand the crew's capabilities.Technology StackFramework: Crew AILLM: Requires an OpenAI API Key (or another compatible model)Search Tool: SerperDev for efficient, real-time search results.Language: Python 3.12+Setup and InstallationFollow these steps to get the project up and running on your local machine.1. Clone the Repositorygit clone [https://github.com/your-username/financial_researcher_ai.git](https://github.com/your-username/financial_researcher_ai.git)
+cd financial_researcher_ai
+2. Create a Virtual EnvironmentIt's highly recommended to use a virtual environment to manage project dependencies.# Create the virtual environment
+python3 -m venv .venv
 
-Welcome to the FinancialResearcherAi Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+# Activate it (on macOS/Linux)
+source .venv/bin/activate
 
-## Installation
+# On Windows
+# .venv\Scripts\activate
+3. Install DependenciesThe crewai command-line tool uses uv to manage dependencies, which are listed in the pyproject.toml file.crewai install
+If you prefer pip, you can install the required packages manually:pip install crewai crewai-tools python-dotenv
+4. Set Up API KeysThis is the most important step. The agents need API keys to access the language model (OpenAI) and the search tool (Serper).Create a new file named .env in the root directory of your project.Add your API keys to the .env file in the following format:# .env
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+# Get your key from: [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+OPENAI_API_KEY="sk-..."
 
-First, if you haven't already, install uv:
+# Get your key from: [https://serper.dev/api-key](https://serper.dev/api-key)
+SERPER_API_KEY="..."
+Note: The .env file is included in .gitignore to ensure your secret keys are not accidentally committed to a public repository.How to RunSet the Target Company: Open the src/financial_researcher_ai/main.py file and change the company name in the inputs dictionary.# src/financial_researcher_ai/main.py
 
-```bash
-pip install uv
-```
-
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/financial_researcher_ai/config/agents.yaml` to define your agents
-- Modify `src/financial_researcher_ai/config/tasks.yaml` to define your tasks
-- Modify `src/financial_researcher_ai/crew.py` to add your own logic, tools and specific args
-- Modify `src/financial_researcher_ai/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-$ crewai run
-```
-
-This command initializes the financial_researcher-ai Crew, assembling the agents and assigning them tasks as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The financial_researcher-ai Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the FinancialResearcherAi Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+def run():
+    """
+    Run the financial researcher crew
+    """
+    inputs = {
+        'company': 'NVIDIA'  # <-- Change this to any company you want
+    }
+    FinancialResearcherAI().crew().kickoff(inputs=inputs)
+Run the Crew: Execute the following command from your terminal (make sure your virtual environment is activated).crewai run
+The agents will begin their tasks, and you will see their progress printed to the console. The final report will be displayed at the end of the process.Customizing the CrewYou can easily modify the behavior of the agents and tasks by editing the YAML configuration files:config/agents.yaml: Change the role, goal, and backstory of each agent to alter their personality and focus.config/tasks.yaml: Modify the description and expected_output for each task to change what the agents are instructed to do.LicenseThis project is licensed under the MIT License. See the LICENSE file for more details.
