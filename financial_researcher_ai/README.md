@@ -8,6 +8,22 @@ This project utilizes the Crew AI framework to create a team of autonomous AI ag
 
 3. An Analyst Agent that synthesizes the collected data into a comprehensive, easy-to-read report with an executive summary and market outlook.
 
+## Features
+
+* **Automated Research**: Automatically gathers up-to-date information about a specified company.
+* **In-Depth Analysis**: Provides insightful analysis, including trends, challenges, and future outlook.
+* **Sequential Task Processing**: Ensures a logical workflow where analysis is only performed after research is complete.
+* **Customizable**: Easily change the target company, or modify the agents' goals and backstories in the configuration files.
+* **Extensible**: Add new agents or tools to expand the crew's capabilities.
+
+## Technology Stack
+
+* **Framework**: Crew AI
+* **LLM**: Requires an OpenAI API Key (or another compatible model)
+* **Search Tool**: SerperDev for efficient, real-time search results.
+* **Language**: Python 3.12+
+
+
 
 ## Installation
 
